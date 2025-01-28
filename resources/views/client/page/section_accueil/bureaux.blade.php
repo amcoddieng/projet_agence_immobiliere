@@ -7,15 +7,15 @@
     </h2>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-       
-        @foreach ($bureau as $bureau)          
+
+        @foreach ($bureau as $bureau)
         {{-- <!-- Carte app --> @dd($app) --}}
         <div class="bg-white border overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transition-transform" data-aos="fade-up" data-aos-duration="500">
             {{-- <img src="{{ asset($app->image[0]) }}" alt="Actualité 1" class="object-cover w-full h-40">' --}}
             <a href="{{route('admin.bien.show',['id' => $bureau->id])}}">
             @if(!empty($bureau->images))
-                
-                   
+
+
                     @php
                         $images = json_decode($bureau->images, true);
                     @endphp
@@ -24,9 +24,9 @@
                     @else
                         <p>Aucune image disponible.</p>
                     @endif
-                
+
               @endif
-            
+
              <div class="p-4">
                 <h5 class="text-lg font-semibold mb-2 text-gray-800">{{ $bureau->titre }} a : {{ $bureau->adresse}} </h5>
                 <p class="text-sm text-gray-600">Prix {{ $bureau->cycle }} : {{ $bureau->prix }}</p>
@@ -39,9 +39,11 @@
 
     <!-- Bouton Voir Plus -->
     <div class="flex justify-left mt-8">
-        <button class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3  shadow-md transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-l hover:from-blue-600 hover:to-blue-500 hover:shadow-lg">
-            Voir plus
-        </button>
+        <a href="{{route('allBureau')}}">
+            <button class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3  shadow-md transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-l hover:from-blue-600 hover:to-blue-500 hover:shadow-lg">
+                Voir plus
+            </button>
+        </a>
     </div>
 </div>
 

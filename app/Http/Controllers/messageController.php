@@ -36,7 +36,7 @@ class MessageController extends Controller
         return redirect()->back()->with('success', 'Votre message a été envoyé avec succès !');
     }
 
-    public function store1(Request $request)
+    public function store_reservation(Request $request)
     {
         $validated = $request->validate([
             'bien_id' => 'required|exists:proprietes,id',
