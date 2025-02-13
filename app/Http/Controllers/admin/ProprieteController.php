@@ -16,6 +16,38 @@ class ProprieteController extends Controller
             'proprietes' => Proprietes::orderBy('created_at', 'desc')->paginate(15)
         ]);
     }
+    public function filtre(Request $request)
+    {
+        $query = Proprietes::query();
+
+        // Filtre par type
+        if ($request->filled('type')) {
+            $query->where('type', $request->type);
+        }
+
+        // Filtre par disponibilité
+        if ($request->filled('disponible')) {
+            $query->where('disponible', $request->disponible);
+        }
+
+        $proprietes = $query->paginate(10);
+
+        return view('admin.index', compact('proprietes'));
+    }
+
+    // public function filtre(Request $request)
+    // {
+    //     $query = Proprietes::query();
+
+    //     if ($request->has('type') && $request->type != '') {
+    //         $query->where('type', $request->type);
+    //     }
+
+    //     $proprietes = $query->paginate(10);
+
+    //     return view('admin.index', compact('proprietes'));
+    // }
+
 
     public function create()
     {
@@ -75,7 +107,7 @@ public function update(ProprieteFormRequest $request, Proprietes $propriete)
     // {
     //     $validatedData = $request->validated();
     //     $validatedData['disponible'] = $request->has('disponible');
-        
+
     //     // Gestion des images
     //     if ($request->hasFile('images')) {
     //         $images = [];
@@ -103,7 +135,7 @@ public function update(ProprieteFormRequest $request, Proprietes $propriete)
     // public function update(ProprieteFormRequest $request, Proprietes $propriete)
     // {
     //     $validatedData = $request->validated();
-        
+
     //     // Gestion des images lors de la mise à jour
     //     if ($request->hasFile('images')) {
     //         // Supprimer les anciennes images si elles existent
@@ -136,17 +168,17 @@ public function update(ProprieteFormRequest $request, Proprietes $propriete)
         if ($images) {
             foreach ($images as $image) {
                 // Suppression de chaque image depuis le disque public
-                Storage::disk('public')->delete($image); 
+                Storage::disk('public')->delete($image);
             }
         }
-    
+
         // Supprimer le bien de la base de données
         $propriete->delete();
-    
+
         return redirect()->route('admin.proprietes.index')->with('success', 'Le bien a été supprimé.');
     }
 
     public function reserver( Proprietes $proprietes){
-        
+
     }
 }

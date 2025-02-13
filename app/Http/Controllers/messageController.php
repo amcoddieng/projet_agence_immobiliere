@@ -7,6 +7,30 @@ use App\Models\message;
 
 class MessageController extends Controller
 {
+    public function index()
+    {
+        $messages = Message::latest()->paginate(15);
+        return view('admin.message.inbox', compact('messages'));
+    }
+
+    public function show($id)
+    {
+        // Récupérer le message par son ID
+        $message = Message::findOrFail($id);
+
+        // Récupérer tous les messages ayant le même email émetteur
+        $messages = Message::where('email_emetteur', $message->email_emetteur)->get();
+
+        return view('admin.message.show', compact('messages', 'message'));
+    }
+
+
+    public function destroy($id)
+    {
+        $message = Message::findOrFail($id);
+        $message->delete();
+        return redirect()->route('messages.index')->with('success', 'Message supprimé avec succès.');
+    }
     /**
      * Enregistrer le message envoyé via le formulaire de contact.
      */
@@ -61,3 +85,4 @@ class MessageController extends Controller
     }
 
 }
+

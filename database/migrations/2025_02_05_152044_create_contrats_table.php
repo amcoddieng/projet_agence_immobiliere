@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('contrats', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreign('client');
+            $table->foreign('bien');
+            $table->string('etat');
+            $table->string('type');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('contrats');
     }
 };

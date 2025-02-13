@@ -1,10 +1,11 @@
     <?php
 
-use App\Http\Controllers\AcueilController;
-use App\Http\Controllers\admin\ProprieteController;
-use App\Http\Controllers\PersonnesController;
-use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\AcueilController;
+    use App\Http\Controllers\admin\ProprieteController;
+    use App\Http\Controllers\PersonnesController;
+    use Illuminate\Support\Facades\Route;
     use App\Http\Controllers\messageController;
+    use App\Http\Controllers\sendMessageController;
 // page d'acueil client
     Route::get('/', [AcueilController::class, 'index'])->name('app_accueil');
     // Route::get('/', function () {
@@ -26,6 +27,8 @@ use Illuminate\Support\Facades\Route;
     Route::prefix('admin')->name('admin.')->group(function(){
         Route::resource('proprietes',ProprieteController::class)->except('show');
     });
+    Route::get('/admin', [ProprieteController::class, 'filtre'])->name('admin.filtre');
+
     Route::prefix('admin')->name('admin.')->group(function(){
         Route::resource('personne',PersonnesController::class);
 
@@ -45,3 +48,10 @@ use Illuminate\Support\Facades\Route;
     Route::get('/appartement', [AcueilController::class, 'allApp'])->name('allApp');
     Route::get('/villa', [AcueilController::class, 'allvilla'])->name('allVilla');
     Route::get('/bureau', [AcueilController::class, 'allbureau'])->name('allBureau');
+
+
+    Route::get('/send-email', [sendMessageController::class, 'sendTestEmail']);
+
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{id}', [MessageController::class, 'show'])->name('messages.show');
+    Route::delete('/messages/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
