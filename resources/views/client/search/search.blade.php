@@ -1,108 +1,40 @@
-<!-- Ajout du lien vers AOS CSS -->
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+ <!-- Hero Section -->
+ <div class="relative h-[600px]">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80"
+        alt="Hero"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/50"></div>
+    </div>
 
-<style>
-    .search {
-        position: relative;
-        background-size: cover;
-        background-position: center;
-        height: 50vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+    <div class="relative max-w-7xl mx-auto px-4 h-full flex flex-col justify-center items-center text-center">
+      <h1 class="text-5xl font-bold text-white mb-6">
+        Trouvez la Propriété de vos Rêves
+      </h1>
+      <p class="text-xl text-white mb-8">
+        Des milliers de propriétés vous attendent
+      </p>
 
-    .search .form-container {
-        background: rgba(255, 255, 255, 0.9);
-        border-radius: 8px;
-        padding: 20px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        width: 90%;
-        max-width: 1200px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .search .form-container input,
-    .search .form-container select {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        outline: none;
-        font-size: 14px;
-    }
-
-    .search .form-container button {
-        grid-column: span 3;
-        padding: 12px;
-        background: #009fe3;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    .search .form-container button:hover {
-        background: #0b64c3;
-    }
-
-    .search .form-container .more-options {
-        grid-column: span 3;
-        text-align: right;
-        font-size: 14px;
-        color: #555;
-        cursor: pointer;
-    }
-
-    /* Responsiveness */
-    @media (max-width: 768px) {
-        .search .form-container {
-            grid-template-columns: 1fr;
-            margin-top: 60%;
-        }
-
-        .search .form-container button {
-            grid-column: span 1;
-        }
-
-        .search .form-container .more-options {
-            text-align: left;
-            grid-column: span 1;
-        }
-    }
-</style>
-
-<div class="search mb-5">
-    <form class="form-container mt-5" data-aos="fade-up" data-aos-duration="1000">
-        <input type="text" name="keywords" placeholder="Mots-clés" data-aos="fade-up" data-aos-delay="100">
-        <select name="property_type" data-aos="fade-up" data-aos-delay="200">
-            <option value="">Type de propriété</option>
-            <option value="villa">Villa</option>
-            <option value="appartement">Appartement</option>
-            <option value="bureau">Bureau</option>
-        </select>
-        <input type="text" name="city" placeholder="Ville" data-aos="fade-up" data-aos-delay="300">
-        <select name="rooms" data-aos="fade-up" data-aos-delay="400">
-            <option value="">Chambre(s)</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6 ou plus</option>
-        </select>
-        <input type="number" name="min_price" placeholder="Prix Min (FCFA)" data-aos="fade-up" data-aos-delay="500">
-        <input type="number" name="max_price" placeholder="Prix Max (FCFA)" data-aos="fade-up" data-aos-delay="600">
-        <button type="submit" data-aos="fade-up" data-aos-delay="700">Rechercher</button>
-    </form>
-</div>
-
-<!-- Ajout du script JavaScript pour AOS -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init();
-</script>
+      <div class="w-full max-w-4xl bg-white p-4 rounded-lg shadow-lg">
+        <div class="flex flex-wrap gap-4">
+          <input
+            type="text"
+            placeholder="Localisation"
+            class="flex-1 min-w-[200px] p-3 border rounded-md"
+          />
+          <select class="flex-1 min-w-[200px] p-3 border rounded-md">
+            <option>Type de bien</option>
+            <option>Maison</option>
+            <option>Appartement</option>
+            <option>Villa</option>
+          </select>
+          <button class="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2">
+            <i data-lucide="search" class="w-5 h-5"></i>
+            Rechercher
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

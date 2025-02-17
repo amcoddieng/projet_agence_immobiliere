@@ -1,35 +1,60 @@
 <!-- Ajout des liens vers AOS -->
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<div class="container mx-auto bg-white pt-6 pb-6 px-4 mb-3" data-aos="fade-up" data-aos-duration="500">
+<div class="max-w-7xl mx-auto px-4 py-5" data-aos="fade-up" data-aos-duration="500">
     <h2 class="text-2xl font-bold text-center mb-8 text-gray-900" data-aos="fade-up" data-aos-duration="1000">
-        Actualités immobilières
+Visitez nos BUREAUX
     </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Grille des cartes -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        @foreach ($villa as $b)
+        <!-- Card pour chaque villa -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden group">
+            <a href="{{route('admin.bien.show',['id' => $b->id])}}">
+            <div class="relative">
+                @if(!empty($b->images))
 
-        @foreach ($bureau as $bureau)
-        {{-- <!-- Carte app --> @dd($app) --}}
-        <div class="bg-white border overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transition-transform" data-aos="fade-up" data-aos-duration="500">
-            {{-- <img src="{{ asset($app->image[0]) }}" alt="Actualité 1" class="object-cover w-full h-40">' --}}
-            <a href="{{route('admin.bien.show',['id' => $bureau->id])}}">
-            @if(!empty($bureau->images))
 
+                @php
+                    $images = json_decode($b->images, true);
+                @endphp
+                @if (is_array($images) && count($images) > 0)
+                    <img src="{{ asset('storage/'.$images[0]) }}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                @else
+                    <p>Aucune image disponible.</p>
+                @endif
 
-                    @php
-                        $images = json_decode($bureau->images, true);
-                    @endphp
-                    @if (is_array($images) && count($images) > 0)
-                        <img src="{{ asset('storage/'.$images[0]) }}" alt="Image de {{ $bureau->titre }}" class="object-cover w-full h-40">
-                    @else
-                        <p>Aucune image disponible.</p>
-                    @endif
+          @endif
 
-              @endif
+                <button class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
+                    <i data-lucide="heart" class="w-5 h-5 text-gray-600"></i>
+                </button>
+            </div>
 
-             <div class="p-4">
-                <h5 class="text-lg font-semibold mb-2 text-gray-800">{{ $bureau->titre }} a : {{ $bureau->adresse}} </h5>
-                <p class="text-sm text-gray-600">Prix {{ $bureau->cycle }} : {{ $bureau->prix }}</p>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-semibold">{{ $b->titre }}</h3>
+                    <p class="text-blue-600 font-bold">{{ number_format($b->prix, 0, ',', ' ') }} €</p>
+                </div>
+
+                <div class="flex items-center gap-2 text-gray-600 mb-4">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <span>{{ $b->ville }}, {{ $b->region }}</span>
+                </div>
+
+                {{-- <p class="text-sm text-gray-600 mb-4">{{ Str::limit($v->description, 100) }}</p> --}}
+
+                <div class="flex justify-between border-t pt-4">
+                    <div class="flex items-center gap-1">
+                        <i data-lucide="bed-double" class="w-4 h-4 text-gray-600"></i>
+                        <span>{{ $b->pieces }} pièces</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i data-lucide="bath" class="w-4 h-4 text-gray-600"></i>
+                        <span>{{ $b->salon }} salon(s)</span>
+                    </div>
+                </div>
             </div>
             </a>
         </div>

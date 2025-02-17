@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <title>Laravel</title>
 
     <!-- Styles -->
     <style>
         body {
             /* background-image: url("{{ asset('xx.webp') }}"); */
-            background-size: cover; 
-            background-position: center; 
+            background-size: cover;
+            background-position: center;
             background-attachment: fixed;
-            background-repeat: no-repeat; 
+            background-repeat: no-repeat;
             height: 100vh;
             margin: 0;
             padding: 0;
@@ -38,4 +38,7 @@
     @yield('content')
     @include('client.footer.footer_client')
 </body>
+<script>
+    lucide.createIcons();
+  </script>
 </html>

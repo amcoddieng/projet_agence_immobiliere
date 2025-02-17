@@ -11,7 +11,7 @@ class AcueilController extends Controller
 {
     public function index(){
         $app = Proprietes::where('type','appartement')->take(4)->get();
-        $villa = Proprietes::where('type','villa')->take(4)->get();
+        $villa = Proprietes::where('type','villa')->take(3)->get();
         $bureau = Proprietes::where('type','bureau')->take(4)->get();
         return view('client.page.accueil',compact('app','villa','bureau'));
         // dd($app);

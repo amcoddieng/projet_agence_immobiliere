@@ -1,36 +1,60 @@
 <!-- Ajout des liens vers AOS -->
 <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-<div class="container mx-auto bg-white pt-6 pb-6 px-4 mb-3" data-aos="fade-up" data-aos-duration="500">
+<div class="max-w-7xl mx-auto px-4 py-5" data-aos="fade-up" data-aos-duration="500">
     <h2 class="text-2xl font-bold text-center mb-8 text-gray-900" data-aos="fade-up" data-aos-duration="1000">
-        Actualités immobilières
+Visitez nos VILLA en vedette
     </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Grille des cartes -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
+        @foreach ($villa as $vapp)
+        <!-- Card pour chaque villa -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden group">
+            <a href="{{route('admin.bien.show',['id' => $vapp->id])}}">
+            <div class="relative">
+                @if(!empty($vapp->images))
 
-        @foreach ($app as $app)
-        {{-- <!-- Carte app --> @dd($app) --}}
-        <div class="bg-white border overflow-hidden shadow-md hover:shadow-lg hover:scale-105 transition-transform" data-aos="fade-up" data-aos-duration="500">
-            <a href="{{route('admin.bien.show',['id' => $app->id])}}">
-            {{-- <img src="{{ asset($app->image[0]) }}" alt="Actualité 1" class="object-cover w-full h-40">' --}}
 
-            @if(!empty($app->images))
+                @php
+                    $images = json_decode($vapp->images, true);
+                @endphp
+                @if (is_array($images) && count($images) > 0)
+                    <img src="{{ asset('storage/'.$images[0]) }}" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300">
+                @else
+                    <p>Aucune image disponible.</p>
+                @endif
 
+          @endif
 
-                    @php
-                        $images = json_decode($app->images, true);
-                    @endphp
-                    @if (is_array($images) && count($images) > 0)
-                        <img src="{{ asset('storage/'.$images[0]) }}" alt="Image de {{ $app->titre }}" class="object-cover w-full h-40">
-                    @else
-                        <p>Aucune image disponible.</p>
-                    @endif
+                <button class="absolute top-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100">
+                    <i data-lucide="heart" class="w-5 h-5 text-gray-600"></i>
+                </button>
+            </div>
 
-              @endif
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-semibold">{{ $vapp->titre }}</h3>
+                    <p class="text-blue-600 font-bold">{{ number_format($vapp->prix, 0, ',', ' ') }} €</p>
+                </div>
 
-             <div class="p-4">
-                <h5 class="text-lg font-semibold mb-2 text-gray-800">{{ $app->titre }} a : {{ $app->adresse}} </h5>
-                <p class="text-sm text-gray-600">Prix {{ $app->cycle }} : {{ $app->prix }}</p>
+                <div class="flex items-center gap-2 text-gray-600 mb-4">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i>
+                    <span>{{ $vapp->ville }}, {{ $vapp->region }}</span>
+                </div>
+
+                {{-- <p class="text-sm text-gray-600 mb-4">{{ Str::limit($v->description, 100) }}</p> --}}
+
+                <div class="flex justify-between border-t pt-4">
+                    <div class="flex items-center gap-1">
+                        <i data-lucide="bed-double" class="w-4 h-4 text-gray-600"></i>
+                        <span>{{ $vapp->pieces }} pièces</span>
+                    </div>
+                    <div class="flex items-center gap-1">
+                        <i data-lucide="bath" class="w-4 h-4 text-gray-600"></i>
+                        <span>{{ $vapp->salon }} salon(s)</span>
+                    </div>
+                </div>
             </div>
             </a>
         </div>
@@ -40,8 +64,9 @@
 
     <!-- Bouton Voir Plus -->
     <div class="flex justify-left mt-8">
-        <a href="{{route('allApp')}}">
-            <button class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3  shadow-md transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-l hover:from-blue-600 hover:to-blue-500 hover:shadow-lg">
+        <a href="{{ route('allVilla') }}">
+            <button
+                class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 shadow-md transform transition-all duration-300 hover:scale-105 hover:bg-gradient-to-l hover:from-blue-600 hover:to-blue-500 hover:shadow-lg">
                 Voir plus
             </button>
         </a>

@@ -1,93 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEN_IMMO - Dakar</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ImmoAgence - Votre Partenaire Immobilier</title>
+    <link href="/style.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @keyframes slideIn {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .slide-in-animation {
-            animation: slideIn 1s ease-out;
-            opacity: 1 !important;
-        }
-    </style>
-    <script>
-        window.addEventListener('load', function() {
-            const nav = document.querySelector('.sticky-nav');
-            nav.classList.add('slide-in-animation');
-        });
-
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            const logo = document.querySelector('.logo-text');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-                logo.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-                logo.classList.remove('scrolled');
-            }
-        });
-    </script>
-</head>
-<body class="min-h-screen flex flex-col">
-    <!-- Barre de contact -->
-    <header class="flex flex-col md:flex-row justify-between items-center p-3 bg-gray-100 text-center md:text-left border-b-2 border-gray-800">
-        <div class="mb-2 md:mb-0">
-            <p class="text-gray-800"><i class="fas fa-phone-alt"></i> 00221338640667 | <i class="fas fa-envelope"></i> SEN-IMMO@SEN-IMMO.net</p>
+  </head>
+  <body>
+    <nav class="bg-white shadow-md">
+      <!-- Top Bar -->
+      <div class="bg-blue-600 text-white py-2">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+          <div class="flex items-center gap-4">
+            <a href="tel:+33123456789" class="flex items-center gap-2 text-sm">
+              <i data-lucide="phone" class="w-4 h-4"></i>
+              +33 1 23 45 67 89
+            </a>
+            <a href="mailto:contact@immobilier.fr" class="flex items-center gap-2 text-sm">
+              <i data-lucide="mail" class="w-4 h-4"></i>
+              contact@immobilier.fr
+            </a>
+          </div>
         </div>
-        <div>
-            <strong class="text-gray-800"><i class="fas fa-building"></i> SEN-IMMO - Dakar</strong>
-        </div>
-    </header>
+      </div>
 
-    <!-- Barre de navigation responsive -->
-    <nav class="sticky-nav bg-white text-gray-800 flex flex-wrap justify-between items-center py-4 px-8 border-b-2 border-gray-800 sticky top-0 z-50">
-        <!-- Logo -->
-        <div class="logo-text text-gray-800 text-2xl font-bold">
-            <i class="fas fa-home"></i> SEN-IMMO
-        </div>
+      <!-- Main Navbar -->
+      <div class="max-w-7xl mx-auto px-4 py-4" style="position: sticky;z-index:100;top:0">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center gap-2">
+            <i data-lucide="building-2" class="w-8 h-8 text-blue-600"></i>
+            <span class="text-xl font-bold">ImmoAgence</span>
+          </div>
 
-        <!-- Menu desktop -->
-        <ul class="hidden md:flex flex-wrap justify-center space-x-6">
-            <li><a class="hover:text-blue-400 transition duration-300 ease-in-out transform hover:scale-110" href="{{ route('app_accueil')}}"><i class="fas fa-home"></i> Accueil</a></li>
-            <li><a class="hover:text-blue-400 transition duration-300 ease-in-out transform hover:scale-110" href="#"><i class="fas fa-shopping-cart"></i> Acheter</a></li>
-            <li><a class="hover:text-blue-400 transition duration-300 ease-in-out transform hover:scale-110" href="#"><i class="fas fa-key"></i> Louer</a></li>
-            <li><a class="hover:text-blue-400 transition duration-300 ease-in-out transform hover:scale-110" href="#"><i class="fas fa-dollar-sign"></i> Vendre</a></li>
-            <li><a class="hover:text-blue-400 transition duration-300 ease-in-out transform hover:scale-110" href="{{ route('app_faireGerer')}}"><i class="fas fa-cogs"></i> Faire gérer</a></li>
-            <li><a class="hover:text-blue-400 transition duration-300 ease-in-out transform hover:scale-110" href="{{ route('app_propos') }}"><i class="fas fa-info-circle"></i> À propos</a></li>
-            <li><a class="hover:text-blue-400 transition duration-300 ease-in-out transform hover:scale-110" href="{{ route('app_contact') }}"><i class="fas fa-envelope"></i> Nous contacter</a></li>
-        </ul>
+          <div class="hidden md:flex items-center gap-8">
+            <a href="#" class="text-gray-600 hover:text-blue-600">Accueil</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">Acheter</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">Louer</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">Vendre</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">Faire gerer</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">A propos</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600">Contact</a>
+          </div>
 
-        <!-- Bouton menu mobile -->
-        <div class="md:hidden">
-            <button onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-                <i class="fas fa-bars text-2xl text-gray-800"></i>
-            </button>
+          <button class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">
+            Estimation Gratuite
+          </button>
         </div>
+      </div>
+
     </nav>
 
-    <!-- Menu mobile -->
-    <ul id="mobile-menu" class="hidden sticky-nav2 flex flex-col space-y-4 p-4 bg-gray-800 text-white">
-        <li><a class="hover:text-blue-400" href="#"><i class="fas fa-home"></i> Accueil</a></li>
-        <li><a class="hover:text-blue-400" href="#"><i class="fas fa-shopping-cart"></i> Acheter</a></li>
-        <li><a class="hover:text-blue-400" href="#"><i class="fas fa-key"></i> Louer</a></li>
-        <li><a class="hover:text-blue-400" href="#"><i class="fas fa-dollar-sign"></i> Vendre</a></li>
-        <li><a class="hover:text-blue-400" href="#"><i class="fas fa-cogs"></i> Faire gérer</a></li>
-        <li><a class="hover:text-blue-400" href="#"><i class="fas fa-info-circle"></i> À propos</a></li>
-        <li><a class="hover:text-blue-400" href="#"><i class="fas fa-envelope"></i> Nous contacter</a></li>
-    </ul>
-</body>
+
+
+  </body>
 </html>
